@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExchangeBox renders correctly 1`] = `
+<div
+  className="exchange-item "
+>
+  <div
+    className="amount-wrapper"
+  >
+    <div
+      className="currency-wrapper"
+    >
+      <select
+        className="currency-select"
+        onChange={[Function]}
+        value="USD"
+      >
+        <option
+          value="EUR"
+        >
+          EUR
+        </option>
+        <option
+          value="GBP"
+        >
+          GBP
+        </option>
+        <option
+          value="USD"
+        >
+          USD
+        </option>
+      </select>
+      <i
+        className="ion-chevron-down"
+      />
+    </div>
+    <div
+      className="digit-input-wrapper"
+    >
+      <input
+        className="digit-input"
+        onChange={[Function]}
+        placeholder="0"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+  <span
+    className="balance"
+  >
+    Balance: 
+    $
+    143.54
+  </span>
+</div>
+`;

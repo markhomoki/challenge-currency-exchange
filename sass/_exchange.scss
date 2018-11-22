@@ -1,0 +1,91 @@
+.exchange {
+	position: relative;
+	width: 480px;
+	margin: 0 auto;
+
+	.btn-wrapper {
+		background-color: $bg-color-alt;
+		padding: 0 40px 50px;
+	}
+}
+
+.exchange-header {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	padding: 15px 25px;
+
+	i {
+		font-size: 24px;
+	}
+}
+
+.exchange-item {
+	padding: 60px 20px 65px 25px;
+	background-color: $bg-color;
+
+	&.first {
+		padding-top: 45px;
+		padding-bottom: 70px;
+	}
+
+	&.alt {
+		background-color: $bg-color-alt;
+
+		.currency-wrapper i {
+			background-color: $bg-color-alt;
+		}
+	}
+
+	&.insufficient {
+		.balance {
+			color: $brand-color-alt;
+		}
+	}
+
+	.amount-wrapper {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+
+		.digit-input-wrapper {
+			flex: 1;
+			padding-left: 10px;
+		}
+	}
+
+	.currency-wrapper {
+		margin-top: 5px;
+		display: flex;
+		align-items: center;
+		position: relative;
+
+		i {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			margin: 0;
+			padding-left: 10px;
+			background: white;
+			width: 25px;
+			display: flex;
+			align-items: center;
+			pointer-events: none;
+			z-index: 2;
+		}
+	}
+
+	.currency {
+		font-size: 38px;
+	}
+
+	.balance {
+		display: block;
+		font-size: 18px;
+		margin-top: 12px;
+		margin-left: 3px;
+		color: $text-color-alt;
+	}
+}

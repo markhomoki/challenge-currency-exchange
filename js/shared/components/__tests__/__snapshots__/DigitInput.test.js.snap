@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DigitInput renders correctly 1`] = `
+<div
+  className="digit-input-wrapper"
+>
+  <input
+    className="digit-input"
+    onChange={[Function]}
+    placeholder="0"
+    type="text"
+    value=""
+  />
+</div>
+`;

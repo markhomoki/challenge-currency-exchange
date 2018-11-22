@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Separator renders correctly 1`] = `
+<div
+  className="separator"
+>
+  <button
+    className="btn-exchange"
+    onClick={[Function]}
+    type="button"
+  >
+    <i
+      className="ion-arrow-swap"
+    />
+  </button>
+  <div
+    className="rate-wrapper"
+  >
+    <i
+      className="ion-arrow-graph-up-right"
+    />
+    <span
+      className="rate"
+    >
+      $
+      1 = 
+      £
+      1.2
+    </span>
+  </div>
+</div>
+`;
