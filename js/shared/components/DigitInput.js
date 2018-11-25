@@ -36,20 +36,43 @@ export default class DigitInput extends React.PureComponent {
 
 	handleChange = (e) => {
 		const { value } = e.target;
+		const formattedValue = value.replace(/\+|-/g, '');
 
-		if (value.match(/[a-z]/i) || value === '0') {
+		const matchedValue = formattedValue.match(/[0-9]+(\.?)([0-9][0-9]?)?/);
+
+		if (formattedValue && !matchedValue) {
 			return;
 		}
 
-		this.updateValue(value);
+		let newValue = matchedValue ? matchedValue[0] : formattedValue;
+
+		// check if has multiple leading 0s
+		if (newValue.match(/^0{2,}/)) {
+			return;
+		}
+
+		const hasDecimal = newValue.indexOf('.') !== -1;
+
+		// check if value doesn't have decimal and starts with 0 + number
+		if (!hasDecimal && newValue.length > 1 && newValue.match(/^0+/)) {
+			newValue = newValue.replace(/^0+/g, '');
+		}
+
+		const maxLength = hasDecimal ? 16 : 15;
+
+		// check if length exceeds the maxLength
+		if (newValue.length > maxLength) {
+			return;
+		}
+
+		this.updateValue(newValue);
 	}
 
 	updateValue = (value) => {
 		const { onInputChange } = this.props;
-		const formattedValue = value.replace(/\+|-/g, '');
-		const floatedValue = formattedValue ? parseFloat(formattedValue) : 0;
+		const floatedValue = value ? parseFloat(value) : 0;
 
-		this.setState({ value: formattedValue });
+		this.setState({ value });
 
 		if (onInputChange) {
 			onInputChange(floatedValue, this.props.direction);

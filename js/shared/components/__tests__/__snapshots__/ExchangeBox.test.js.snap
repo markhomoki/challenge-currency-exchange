@@ -47,12 +47,16 @@ exports[`ExchangeBox renders correctly 1`] = `
       />
     </div>
   </div>
-  <span
-    className="balance"
+  <div
+    className="exchange-balance-wrapper"
   >
-    Balance: 
-    $
-    143.54
-  </span>
+    <span
+      className="balance"
+    >
+      Balance: 
+      $
+      143.54
+    </span>
+  </div>
 </div>
 `;

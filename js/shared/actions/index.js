@@ -1,5 +1,17 @@
 import api from 'app/utils/api';
 
+export const exchangeMoney = (fromCur, toCur, fromVal, toVal) => {
+	return {
+		type: 'WALLET_EXCHANGE_MONEY',
+		payload: {
+			fromCur,
+			toCur,
+			fromVal,
+			toVal,
+		},
+	};
+};
+
 // Custom Thunk Middleware
 export const rejectData = (payload, res) => {
 	return {

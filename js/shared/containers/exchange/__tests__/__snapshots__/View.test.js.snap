@@ -8,6 +8,46 @@ exports[`Exchange.View renders correctly 1`] = `
     className="exchange"
   >
     <div
+      className="summary hidden"
+    >
+      <div
+        className="summary-info-wrapper"
+      >
+        <div
+          className="complete-icon"
+        >
+          <i
+            className="ion-checkmark"
+          />
+        </div>
+        <p
+          className="info"
+        >
+          You exchanged 
+          
+          0.00
+           
+          <i
+            className="ion-android-arrow-forward"
+          />
+           
+          
+          0.00
+        </p>
+      </div>
+      <div
+        className="btn-wrapper"
+      >
+        <button
+          className="btn "
+          onClick={[Function]}
+          type="button"
+        >
+          Done
+        </button>
+      </div>
+    </div>
+    <div
       className="exchange-header"
     >
       <i
@@ -68,13 +108,17 @@ exports[`Exchange.View renders correctly 1`] = `
           />
         </div>
       </div>
-      <span
-        className="balance"
+      <div
+        className="exchange-balance-wrapper"
       >
-        Balance: 
-        $
-        143.73
-      </span>
+        <span
+          className="balance"
+        >
+          Balance: 
+          $
+          143.73
+        </span>
+      </div>
     </div>
     <div
       className="separator"
@@ -100,7 +144,7 @@ exports[`Exchange.View renders correctly 1`] = `
           $
           1 = 
           £
-          0
+          0.0000
         </span>
       </div>
     </div>
@@ -150,19 +194,24 @@ exports[`Exchange.View renders correctly 1`] = `
           />
         </div>
       </div>
-      <span
-        className="balance"
+      <div
+        className="exchange-balance-wrapper"
       >
-        Balance: 
-        £
-        79.14
-      </span>
+        <span
+          className="balance"
+        >
+          Balance: 
+          £
+          79.14
+        </span>
+      </div>
     </div>
     <div
       className="btn-wrapper"
     >
       <button
         className="btn disabled"
+        onClick={[Function]}
         type="button"
       >
         Exchange

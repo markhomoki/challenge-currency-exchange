@@ -10,10 +10,12 @@ export default class ExchangeBox extends React.PureComponent {
 		balance: PropTypes.number.isRequired,
 		className: PropTypes.string,
 		currency: PropTypes.oneOf([EUR, GBP, USD]).isRequired,
+		showMinAmount: PropTypes.bool,
 	}
 
 	static defaultProps = {
 		className: '',
+		showMinAmount: false,
 	}
 
 	handleCurrencyChange = (e) => {
@@ -30,6 +32,7 @@ export default class ExchangeBox extends React.PureComponent {
 			className,
 			currency,
 			onCurrencyChange,
+			showMinAmount,
 			...rest
 		} = this.props;
 
@@ -44,7 +47,12 @@ export default class ExchangeBox extends React.PureComponent {
 					</div>
 					<DigitInput {...rest} />
 				</div>
-				<span className="balance">Balance: {this.renderSymbol()}{balance}</span>
+				<div className="exchange-balance-wrapper">
+					<span className="balance">Balance: {this.renderSymbol()}{balance.toFixed(2)}</span>
+					{!!showMinAmount &&
+						<span className="min-amount">Minimum amount is {this.renderSymbol()}0.10</span>
+					}
+				</div>
 			</div>
 		);
 	}

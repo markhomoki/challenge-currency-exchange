@@ -1,8 +1,11 @@
-@import 'mixins';
-@import 'variables';
-@import 'ionicons';
-@import 'buttons';
-@import 'exchange';
+@import 'vendor/ionicons';
+
+@import 'partials/mixins';
+@import 'partials/variables';
+@import 'partials/buttons';
+
+@import 'modules/exchange';
+@import 'modules/summary';
 
 body {
 	margin: 0;

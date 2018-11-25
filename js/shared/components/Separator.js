@@ -34,7 +34,7 @@ export default class Separator extends React.PureComponent {
 				</button>
 				<div className="rate-wrapper">
 					<i className="ion-arrow-graph-up-right" />
-					<span className="rate">{fromSymbol}1 = {toSymbol}{pairValue}</span>
+					<span className="rate">{fromSymbol}1 = {toSymbol}{pairValue.toFixed(4)}</span>
 				</div>
 			</div>
 		);

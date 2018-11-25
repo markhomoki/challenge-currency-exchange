@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 const defaultState = {
 	value: 0,
 };
@@ -10,7 +8,7 @@ export default function reducer(state = defaultState, action) {
 			const { rates } = action.payload.data;
 
 			return {
-				value: parseFloat(rates[Object.keys(rates)[0]].toFixed(4)),
+				value: parseFloat(rates[Object.keys(rates)[0]]),
 			};
 		default:
 			return state;

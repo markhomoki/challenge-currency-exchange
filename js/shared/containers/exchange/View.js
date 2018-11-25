@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { fetchRates } from 'app/actions';
-import { ExchangeBox, Separator } from 'app/components';
+import { exchangeMoney, fetchRates } from 'app/actions';
+import { Button, ExchangeBox, Separator } from 'app/components';
 import { GBP, USD } from 'app/types';
+import Summary from './Summary';
 
 @connect((state) => {
 	return {
@@ -18,13 +19,11 @@ export default class View extends React.PureComponent {
 		this.state = {
 			from: {
 				currency: USD,
-				value: 0,
-				balance: props.wallet[USD],
+				value: '',
 			},
 			to: {
 				currency: GBP,
-				value: 0,
-				balance: props.wallet[GBP],
+				value: '',
 			},
 		};
 	}
@@ -40,7 +39,32 @@ export default class View extends React.PureComponent {
 		this.props.dispatch(fetchRates(from.currency, to.currency));
 	}
 
-	exchange = (value, direction) => {
+	exchange = () => {
+		const { from, to } = this.state;
+		const fromCur = from.currency;
+		const toCur = to.currency;
+		const fromVal = from.value;
+		const toVal = to.value;
+
+		// exchange and update redux store
+		this.props.dispatch(exchangeMoney(fromCur, toCur, fromVal, toVal));
+
+		// reset input values to 0
+		this.handleInputChange(0, 'from');
+
+		// show summary screen
+		this.props.dispatch({
+			type: 'SUMMARY_SHOW',
+			payload: {
+				fromCur,
+				toCur,
+				fromVal,
+				toVal,
+			},
+		});
+	}
+
+	convert = (value, direction) => {
 
 		const { rate } = this.props;
 
@@ -65,7 +89,7 @@ export default class View extends React.PureComponent {
 
 	handleInputChange = (value, direction) => {
 		const isFrom = direction === 'from';
-		const pairValue = this.exchange(value, direction);
+		const pairValue = this.convert(value, direction);
 
 		const fromValue = isFrom ? value : pairValue;
 		const toValue = !isFrom ? value : pairValue;
@@ -98,14 +122,12 @@ export default class View extends React.PureComponent {
 				[direction]: {
 					...prevState[direction],
 					currency,
-					balance: this.props.wallet[currency],
 				},
 			};
 		}, this.fetchData);
 	}
 
 	render() {
-
 		const {
 			rate,
 			wallet,
@@ -117,12 +139,14 @@ export default class View extends React.PureComponent {
 		} = this.state;
 
 		const isInsufficient = wallet[from.currency] < from.value;
-		const disabledClass = (!from.value || isInsufficient) ? 'disabled' : '';
+		const showMinAmount = !!(from.value && from.value < 0.10);
+		const btnDisabled = !from.value || isInsufficient || showMinAmount;
 		const insufficientClass = isInsufficient ? 'insufficient' : '';
 
 		return (
 			<div className="site-inner">
 				<div className="exchange">
+					<Summary />
 					<div className="exchange-header">
 						<i className="ion-close" />
 						<h1 className="page-title">Exchange</h1>
@@ -130,11 +154,13 @@ export default class View extends React.PureComponent {
 					</div>
 					<ExchangeBox
 						{...from}
-						testID="ExchangeBoxFrom"
+						balance={wallet[from.currency]}
 						className={`first ${insufficientClass}`}
 						direction="from"
-						onInputChange={this.handleInputChange}
 						onCurrencyChange={this.handleCurrencyChange}
+						onInputChange={this.handleInputChange}
+						showMinAmount={showMinAmount}
+						testID="ExchangeBoxFrom"
 					/>
 					<Separator
 						fromCurrency={from.currency}
@@ -144,13 +170,14 @@ export default class View extends React.PureComponent {
 					/>
 					<ExchangeBox
 						{...to}
+						balance={wallet[to.currency]}
 						className="alt"
 						direction="to"
-						onInputChange={this.handleInputChange}
 						onCurrencyChange={this.handleCurrencyChange}
+						onInputChange={this.handleInputChange}
 					/>
 					<div className="btn-wrapper">
-						<button type="button" className={`btn ${disabledClass}`}>Exchange</button>
+						<Button testID="ExchangeButton" onClick={this.exchange} disabled={btnDisabled}>Exchange</Button>
 					</div>
 				</div>
 			</div>

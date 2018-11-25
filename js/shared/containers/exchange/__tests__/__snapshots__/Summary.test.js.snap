@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Exchange.Summary renders correctly 1`] = `
+<div
+  className="summary hidden"
+>
+  <div
+    className="summary-info-wrapper"
+  >
+    <div
+      className="complete-icon"
+    >
+      <i
+        className="ion-checkmark"
+      />
+    </div>
+    <p
+      className="info"
+    >
+      You exchanged 
+      
+      0.00
+       
+      <i
+        className="ion-android-arrow-forward"
+      />
+       
+      
+      0.00
+    </p>
+  </div>
+  <div
+    className="btn-wrapper"
+  >
+    <button
+      className="btn "
+      onClick={[Function]}
+      type="button"
+    >
+      Done
+    </button>
+  </div>
+</div>
+`;

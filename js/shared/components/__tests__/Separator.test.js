@@ -4,7 +4,6 @@ import { GBP, USD } from 'app/types';
 import Separator from '../Separator';
 
 describe('Separator', () => {
-	let wrapper;
 	const element = (
 		<Separator
 			fromCurrency={USD}
@@ -13,10 +12,6 @@ describe('Separator', () => {
 			toCurrency={GBP}
 		/>
 	);
-
-	beforeEach(() => {
-		wrapper = mount(element);
-	});
 
 	it('renders correctly', () => {
 		const tree = renderer.create(element).toJSON();

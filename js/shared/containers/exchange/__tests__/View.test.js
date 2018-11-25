@@ -1,13 +1,10 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import { Provider } from 'react-redux';
 import store from 'app/store';
 import { fetchRates } from 'app/actions';
 import { GBP, USD } from 'app/types';
 import View from '../View';
-
-function sleep(ms) {
-	return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 describe('Exchange.View', () => {
 
@@ -20,7 +17,7 @@ describe('Exchange.View', () => {
 	});
 
 	it('renders correctly', () => {
-		const tree = renderer.create(<View store={store} />).toJSON();
+		const tree = renderer.create(<Provider store={store}><View /></Provider>).toJSON();
 		expect(tree).toMatchSnapshot();
 	});
 
@@ -31,7 +28,7 @@ describe('Exchange.View', () => {
 		expect(newRate).not.toBe(prevRate);
 	});
 
-	it('swaps the currency pair on clicking swap', async () => {
+	it('swaps the currency pair on clicking swap', () => {
 		const { from, to } = instance.state;
 		instance.swap();
 		expect(instance.state.to).toEqual(from);
@@ -46,12 +43,13 @@ describe('Exchange.View', () => {
 
 	it('blocks the button if balance is less than the requested amount', () => {
 		instance.handleInputChange(10000, 'from');
-		expect(wrapper.find('.btn').hasClass('disabled')).toBe(true);
+		expect(wrapper.find({ testID: 'ExchangeButton' }).prop('disabled')).toBe(true);
 	});
 
 	it('blocks the button if amount is 0', () => {
 		instance.handleInputChange(0, 'from');
-		expect(wrapper.find('.btn').hasClass('disabled')).toBe(true);
+
+		expect(wrapper.find({ testID: 'ExchangeButton' }).prop('disabled')).toBe(true);
 	});
 
 });

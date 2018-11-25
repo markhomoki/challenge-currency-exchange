@@ -81,11 +81,19 @@
 		font-size: 38px;
 	}
 
-	.balance {
-		display: block;
+	.exchange-balance-wrapper {
 		font-size: 18px;
 		margin-top: 12px;
-		margin-left: 3px;
+		padding: 0 3px;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.balance {
 		color: $text-color-alt;
+	}
+
+	.min-amount {
+		color: $brand-color-alt;
 	}
 }
